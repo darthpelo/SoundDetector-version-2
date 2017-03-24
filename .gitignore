@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Compiled Object files
 *.slo
 *.lo
@@ -27,3 +28,9 @@
 *.exe
 *.out
 *.app
+=======
+.pioenvs
+.piolibdeps
+.clang_complete
+.gcc-flags.json
+>>>>>>> Initial commit
