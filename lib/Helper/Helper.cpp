@@ -35,6 +35,14 @@ int Helper::invertDiff() {
   return first-second;
 }
 
+bool Helper::getFlag() {
+  return flag;
+}
+
+void Helper::setFlag(bool value) {
+  flag = value;
+}
+
 void printDetail(uint8_t type, int value) {
   switch (type) {
     case TimeOut:

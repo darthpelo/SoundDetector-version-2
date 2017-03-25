@@ -16,9 +16,13 @@ public:
   int invertDiff();
 
   void printDetail(uint8_t type, int value);
-  
+
+  bool getFlag();
+  void setFlag(bool value);
+
 private:
   int first, second;
+  bool flag;
 };
 
 #endif // HELPER_H_
