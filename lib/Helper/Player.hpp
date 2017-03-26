@@ -5,9 +5,10 @@ public:
   Player() {};
   ~Player() {};
 
-  void isPlaying(bool value);
-  bool canPlay();
+  void startPlay();
+  void finished();
+  bool isPlaying();
 
 private:
-  bool flag;
+  bool play;
 };

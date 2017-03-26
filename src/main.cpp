@@ -13,15 +13,7 @@ int micPin = A0;
 int micValue0 = 0;
 int micValue1 = 0;
 
-Helper helper;
-
-bool mayor(int value) {
-  return helper.diff() > value;
-}
-
-bool equal(int value) {
-  return helper.diff() == value;
-}
+Helper helper(0,0);
 
 typedef Singleton<Player> PlayerSingleton;   // Global declaration
 
@@ -29,6 +21,8 @@ void setup()
 {
   mySoftwareSerial.begin(9600);
   Serial.begin(115200);
+
+  PlayerSingleton::Instance()->finished();
 
   Serial.println();
   Serial.println(F("DFRobot DFPlayer Mini Demo"));
@@ -56,16 +50,11 @@ void setup()
   //----Read imformation----
   Serial.println(myDFPlayer.readState()); //read mp3 state
   Serial.println(myDFPlayer.readVolume()); //read current volume
-  Serial.println(myDFPlayer.readEQ()); //read EQ setting
-  Serial.println(myDFPlayer.readFileCounts()); //read all file counts in SD card
-  Serial.println(myDFPlayer.readCurrentFileNumber()); //read current play file number
-
-  PlayerSingleton::Instance()->isPlaying(false);
 }
 
 void loop()
 {
-  if (PlayerSingleton::Instance()->canPlay() == false) {
+  if (PlayerSingleton::Instance()->isPlaying() == false) {
     micValue0 = analogRead(micPin);
     delay(1);
     micValue1 = analogRead(micPin);
@@ -74,22 +63,14 @@ void loop()
     helper.setValues(0, 0);
   }
 
+  if (helper.equal(2) && PlayerSingleton::Instance()->isPlaying() == false) {
+    PlayerSingleton::Instance()->startPlay();
 
-
-  if (equal(2) && PlayerSingleton::Instance()->canPlay() == false ) {
-    PlayerSingleton::Instance()->isPlaying(true);
-
-    myDFPlayer.play(4);
-    Serial.print(F("Playing..."));
-
-    // if (counter > 1) {
-    //   Serial.print(F("Pause..."));
-    //   myDFPlayer.pause();
-    // }
+    myDFPlayer.play(helper.randint(29) + 1);
   }
 
   if (myDFPlayer.readType() == DFPlayerPlayFinished) {
-    PlayerSingleton::Instance()->isPlaying(false);
+    PlayerSingleton::Instance()->finished();
     myDFPlayer.pause();
   }
 

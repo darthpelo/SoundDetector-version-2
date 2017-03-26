@@ -7,7 +7,7 @@
 
 class Helper {
 public:
-  Helper();
+  Helper(int first, int second): first(first), second(second) {}
 
   void setValues(int value1, int value2);
 
@@ -15,14 +15,16 @@ public:
 
   int invertDiff();
 
-  void printDetail(uint8_t type, int value);
+  bool equal(int value);
 
-  bool getFlag();
-  void setFlag(bool value);
+  bool mayor(int value);
+
+  int randint(int n);
+  
+  void printDetail(uint8_t type, int value);
 
 private:
   int first, second;
-  bool flag;
 };
 
 #endif // HELPER_H_

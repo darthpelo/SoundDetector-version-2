@@ -1,9 +1,13 @@
 #include "Player.hpp"
 
-void Player::isPlaying(bool value) {
-  flag = value;
+void Player::startPlay() {
+  play = true;
 }
 
-bool Player::canPlay() {
-  return flag;
+void  Player::finished() {
+  play = false;
+}
+
+bool Player::isPlaying() {
+  return play;
 }

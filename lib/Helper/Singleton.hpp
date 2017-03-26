@@ -1,6 +1,7 @@
 #ifndef __SINGLETON_HPP_
 #define __SINGLETON_HPP_
 #include <stddef.h>  // defines NULL
+#include <assert.h>
 
 template <class T>
 class Singleton
@@ -8,7 +9,7 @@ class Singleton
 public:
   static T* Instance() {
       if(!m_pInstance) m_pInstance = new T;
-      // assert(m_pInstance != NULL);
+      assert(m_pInstance != NULL);
       return m_pInstance;
   }
 protected:

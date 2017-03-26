@@ -1,10 +1,8 @@
 #include <Helper.h>
-#include "DFRobotDFPlayerMini.h"
+#include <stdlib.h>
+#include <assert.h>
 
-Helper::Helper()
-// Base library type
-{
-}
+#include <DFRobotDFPlayerMini.h>
 
 /*
   Store microphone samples data
@@ -35,12 +33,35 @@ int Helper::invertDiff() {
   return first-second;
 }
 
-bool Helper::getFlag() {
-  return flag;
+bool Helper::mayor(int value) {
+  return diff() > value;
 }
 
-void Helper::setFlag(bool value) {
-  flag = value;
+bool Helper::equal(int value) {
+  return diff() == value;
+}
+
+/* Returns an integer in the range [0, n).
+ *
+ * Uses rand(), and so is affected-by/affects the same seed.
+ */
+int Helper::randint(int n) {
+  if ((n - 1) == RAND_MAX) {
+    return rand();
+  } else {
+    // Chop off all of the values that would cause skew...
+    long end = RAND_MAX / n; // truncate skew
+    assert (end > 0L);
+    end *= n;
+
+    // ... and ignore results from rand() that fall above that limit.
+    // (Worst case the loop condition should succeed 50% of the time,
+    // so we can expect to bail out of this loop pretty quickly.)
+    int r;
+    while ((r = rand()) >= end);
+
+    return r % n;
+  }
 }
 
 void printDetail(uint8_t type, int value) {
