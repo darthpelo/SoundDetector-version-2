@@ -20,7 +20,7 @@ public:
   bool mayor(int value);
 
   int randint(int n);
-  
+
   void printDetail(uint8_t type, int value);
 
 private:

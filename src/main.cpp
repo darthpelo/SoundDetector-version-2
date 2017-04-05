@@ -39,7 +39,7 @@ void setup()
   myDFPlayer.setTimeOut(500); //Set serial communictaion time out 500ms
 
   //----Set volume----
-  myDFPlayer.volume(30);  //Set volume value (0~30).
+  myDFPlayer.volume(28);  //Set volume value (0~30).
 
   //----Set different EQ----
   myDFPlayer.EQ(DFPLAYER_EQ_NORMAL);
